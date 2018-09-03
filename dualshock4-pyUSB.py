@@ -1,3 +1,5 @@
+# Use pyUSB to communicate with a dualshock 4 controller
+
 import usb.core
 import usb.util
 import usb.backend.libusb1
@@ -5,20 +7,14 @@ import sys
 import os
 import time
 
-# DS4 controller ids
+# DS4 controller ids (might be different on your side)
 VENDOR_ID = 0x54c
 PRODUCT_ID = 0x9cc
 
-BACKEND = usb.backend.libusb1.get_backend(find_library=lambda x: "C:\\Users\\Pai\\Anaconda3\\Lib\\site-packages\\libusb\\_platform\\_windows\\x64\\libusb-1.0.dll")
+# Don't forget to change the path to libusb-1.0.dll
+BACKEND = usb.backend.libusb1.get_backend(find_library=lambda x: "C:\\Users\\Username\\Anaconda3\\Lib\\site-packages\\libusb\\_platform\\_windows\\x64\\libusb-1.0.dll")
 
 dev = usb.core.find(idVendor=VENDOR_ID, idProduct=PRODUCT_ID, backend=BACKEND)
-
-#if dev is None:
-#    print('Device not found')
-#else:
-#    #print(dev)
-#    print(dev)
-
 cfg = dev.get_active_configuration()
 
 INTERFACE_DS4 = 3 # HID interface
@@ -28,9 +24,6 @@ interface = cfg[(INTERFACE_DS4, SETTING_DS4)]
 ENDPOINT_DS4_OUT = 0 # Input endpoint
 endpoint = interface[ENDPOINT_DS4_OUT]
 
-#print(interface)
-#print(endpoint)
-
 trigger = 0
 
 while trigger != 255: 
@@ -38,12 +31,12 @@ while trigger != 255:
 	os.system('cls')
 
 	# Axes
-	#print('Readout L stick  X:', format(endpoint.read(0x40)[1],'#04X'), format(endpoint.read(0x40)[1],'08b'), endpoint.read(0x40)[1])
-	#print('Readout L stick  Y:', format(endpoint.read(0x40)[2],'#04X'), format(endpoint.read(0x40)[2],'08b'), endpoint.read(0x40)[2])
-	#print('Readout R stick  X:', format(endpoint.read(0x40)[3],'#04X'), format(endpoint.read(0x40)[3],'08b'), endpoint.read(0x40)[3])
-	#print('Readout R stick  Y:', format(endpoint.read(0x40)[4],'#04X'), format(endpoint.read(0x40)[4],'08b'), endpoint.read(0x40)[4])
-	#print('Readout L2 trigger:', format(endpoint.read(0x40)[8],'#04X'), format(endpoint.read(0x40)[8],'08b'), endpoint.read(0x40)[8])
-	#print('Readout R2 trigger:', format(endpoint.read(0x40)[9],'#04X'), format(endpoint.read(0x40)[9],'08b'), endpoint.read(0x40)[9],'\n')
+	print('Readout L stick  X:', format(endpoint.read(0x40)[1],'#04X'), format(endpoint.read(0x40)[1],'08b'), endpoint.read(0x40)[1])
+	print('Readout L stick  Y:', format(endpoint.read(0x40)[2],'#04X'), format(endpoint.read(0x40)[2],'08b'), endpoint.read(0x40)[2])
+	print('Readout R stick  X:', format(endpoint.read(0x40)[3],'#04X'), format(endpoint.read(0x40)[3],'08b'), endpoint.read(0x40)[3])
+	print('Readout R stick  Y:', format(endpoint.read(0x40)[4],'#04X'), format(endpoint.read(0x40)[4],'08b'), endpoint.read(0x40)[4])
+	print('Readout L2 trigger:', format(endpoint.read(0x40)[8],'#04X'), format(endpoint.read(0x40)[8],'08b'), endpoint.read(0x40)[8])
+	print('Readout R2 trigger:', format(endpoint.read(0x40)[9],'#04X'), format(endpoint.read(0x40)[9],'08b'), endpoint.read(0x40)[9],'\n')
 
 	# Accelerometers (2 bytes to signed integer)
 	data = endpoint.read(0x40)
