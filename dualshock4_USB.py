@@ -1,3 +1,6 @@
+# Use pygame to get readouts from a ds4 controller
+# This is an efficient way to get inputs as long as you don't need six-axis data
+
 import pygame
 import os
 
