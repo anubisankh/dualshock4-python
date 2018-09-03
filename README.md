@@ -1,5 +1,5 @@
 # dualshock4-python
-Use either pygame or pyUSB to read inputs from a PS4 dualshock 4 controller
+Use either pygame or pyUSB to read inputs from a PS4 dualshock 4 controller through USB connection
 
 Author: Chi-Feng Pai (cfpai@ieee.org)
 Platform: Win10
