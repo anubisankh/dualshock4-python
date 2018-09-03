@@ -44,28 +44,29 @@ while trigger != 255:
 	print('Accelerometer Y:', format(256*data[16]+data[17],'016b'), 256*data[16]+data[17]-(65536 if data[16] > 127 else 0))
 	print('Accelerometer Z:', format(256*data[14]+data[15],'016b'), 256*data[14]+data[15]-(65536 if data[14] > 127 else 0),'\n')
 
-	# Gyroscopes
+	# Gyroscopes  (2 bytes to signed integer)
 	data = endpoint.read(0x40)
 	print('Gyroscope X (Roll) :', format(256*data[20]+data[21],'016b'), 256*data[20]+data[21]-(65536 if data[20] > 127 else 0))
 	print('Gyroscope Y (Yaw)  :', format(256*data[22]+data[23],'016b'), 256*data[22]+data[23]-(65536 if data[22] > 127 else 0))
 	print('Gyroscope Z (Pitch):', format(256*data[24]+data[25],'016b'), 256*data[24]+data[25]-(65536 if data[24] > 127 else 0),'\n')
 
-	#print('Touch PAD:', format(endpoint.read(0x40)[40],'#04X'), format(endpoint.read(0x40)[40],'08b'), endpoint.read(0x40)[40],'\n')
+	# Touch PAD (for more details please refer to the listed references)
+	print('Touch PAD:', format(endpoint.read(0x40)[40],'#04X'), format(endpoint.read(0x40)[40],'08b'), endpoint.read(0x40)[40],'\n')
 
 	# Hats
-	#print("Hats:", endpoint.read(0x40)[5]&15,'\n') #0,1,2,3,4,5,6,7,8
+	print("Hats:", endpoint.read(0x40)[5]&15,'\n') #0,1,2,3,4,5,6,7,8
 
 	# Buttons
-	#print("Square:", endpoint.read(0x40)[5]&16!=0)
-	#print("Cross:", endpoint.read(0x40)[5]&32!=0)
-	#print("Circle:", endpoint.read(0x40)[5]&64!=0)
-	#print("Triangle:", endpoint.read(0x40)[5]&128!=0,'\n')
+	print("Square:", endpoint.read(0x40)[5]&16!=0)
+	print("Cross:", endpoint.read(0x40)[5]&32!=0)
+	print("Circle:", endpoint.read(0x40)[5]&64!=0)
+	print("Triangle:", endpoint.read(0x40)[5]&128!=0,'\n')
 
 	# Timestamp
-	#print('Timestamp:', endpoint.read(0x40)[7]>>2)
+	print('Timestamp:', endpoint.read(0x40)[7]>>2)
 
 	# Battery status
-	#print('Battery:', endpoint.read(0x40)[30]%16) # 11 means it's Max and charging
+	print('Battery:', endpoint.read(0x40)[30]%16) # 11 means it's Max and charging
 	time.sleep(0.1)
 	
 	trigger = endpoint.read(0x40)[8] # press L2 fully to break
