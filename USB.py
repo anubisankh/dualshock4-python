@@ -7,7 +7,7 @@ import usb.backend.libusb1
 import sys
 
 # You have to change the path below to where you placed your libusb-1.0.dll
-BACKEND = usb.backend.libusb1.get_backend(find_library=lambda x: "C:\\Users\\Pai\\Anaconda3\\Lib\\site-packages\\libusb\\_platform\\_windows\\x64\\libusb-1.0.dll")
+BACKEND = usb.backend.libusb1.get_backend(find_library=lambda x: "C:\\Users\\Username\\Anaconda3\\Lib\\site-packages\\libusb\\_platform\\_windows\\x64\\libusb-1.0.dll")
 
 dev = usb.core.find(find_all=True)
 
