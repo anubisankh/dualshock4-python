@@ -1,3 +1,6 @@
+# Test your usb connections through pyUSB
+# Note that most people will have issues getting anything from devices if the backend hasn't been specifically assigned
+
 import usb.core
 import usb.util
 import usb.backend.libusb1
